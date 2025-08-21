@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
-import Layout from './pages/Layout'
+import Layout from './pages/Layout.jsx'
 import Home from './pages/Home.jsx'
-import Login from './pages/Login'
+import Login from './components/login.jsx'
+import Register from './components/register.jsx'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Route>
     </Routes>
   )

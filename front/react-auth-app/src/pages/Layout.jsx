@@ -10,6 +10,7 @@ export default function Layout() {
           </li>
           <li>
             <Link to="/login">Login</Link>
+            <Link to="/register">Cadastro</Link>
           </li>
         </ul>
       </nav>
