@@ -6,6 +6,7 @@ const createUserTable = async (): Promise<void> => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
+        password VARCHAR(100) NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
     );
     `;

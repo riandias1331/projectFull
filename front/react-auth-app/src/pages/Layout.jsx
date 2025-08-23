@@ -10,11 +10,13 @@ export default function Layout() {
           </li>
           <li>
             <Link to="/login">Login</Link>
-            <Link to="/register">Cadastro</Link>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
           </li>
         </ul>
       </nav>
-      
+
       <main>
         <Outlet />
       </main>

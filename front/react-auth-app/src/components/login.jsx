@@ -47,7 +47,7 @@ const Login = () => {
             localStorage.setItem('username', data.user?.username || 'Usuário');
             
             setTimeout(() => {
-                navigate('/', { 
+                navigate('/main', { 
                     replace: true,
                     state: { fromLogin: true }
                 });
@@ -94,7 +94,8 @@ const Login = () => {
                 </div>
                 
                 <div className="forgot-password">
-                    Esqueceu a senha? <span>Clique aqui!</span>
+                    Esqueceu a senha? 
+                    {/* <Link to="/register">Clique aqui!</Link> */}
                 </div>
                 
                 <button 

@@ -7,12 +7,14 @@ import {
     deleteUserService,
     deleteUserAllService
 } from '../models/model.postgres';
+import jwt from 'jsonwebtoken';
 
 // Definindo tipos para melhor organização
 interface User {
     id?: number;
     name: string;
     email: string;
+    password: string;
 }
 
 interface DeleteAllResponse {
@@ -27,26 +29,33 @@ interface ApiResponse<T = any> {
 }
 
 // Função auxiliar com tipagem
-const handleResponse = <T>(res: Response, status: number, message: string, data?: T): void => {
-    const response: ApiResponse<T> = {
+const handleResponse = <T>(res: Response, status: number, message: string, data?: T, token?: string): void => {
+    const response: ApiResponse<T> & { token?: string } = {
         status,
         message,
-        data
+        data,
+        ...(token && { token })
     };
     res.status(status).json(response);
 }
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
-    const { name, email } = req.body as User;
-
-    if (!name || !email) {
-        handleResponse(res, 400, 'Name and email are required');
-        return;
-    }
 
     try {
-        const newUser = await createUserService(name, email);
-        handleResponse<User>(res, 201, 'User created successfully', newUser);
+        const { name, email, password } = req.body as User;
+
+        if (!name || !email || !password) {
+            handleResponse(res, 400, 'Name and email are required');
+            return;
+        }
+        const user = await createUserService(name, email, password);
+        // Gera o token JWT
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+        
+        console.log('token:', token, user);
+        console.log('User created', 'token:', token, user);
+        handleResponse<User>(res, 201, 'User created successfully', user, token);
+        res.json(token)
     } catch (error) {
         console.error('Error in createUser:', error);
         handleResponse(res, 500, 'Error creating user');
@@ -64,8 +73,9 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
 }
 
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
     try {
+        const { id } = req.params;
+
         const user = await getUserByIdService(parseInt(id));
         if (!user) {
             handleResponse(res, 404, 'User not found');
@@ -79,11 +89,12 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
 }
 
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.params;
-    const { name, email } = req.body as User;
-    
     try {
-        const updatedUser = await updateUserService(parseInt(id), name, email);
+        const { id } = req.params;
+        const { name, email, password } = req.body as User;
+
+
+        const updatedUser = await updateUserService(parseInt(id), name, email, password);
         if (!updatedUser) {
             handleResponse(res, 404, 'User not found');
             return;
@@ -113,7 +124,7 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
 export const deleteAll = async (req: Request, res: Response): Promise<void> => {
     try {
         const deleted = await deleteUserAllService();
-        
+
         // Verificação mais segura da estrutura de retorno
         if (!deleted || typeof deleted.count !== 'number') {
             handleResponse(res, 500, 'Invalid response from delete operation');
@@ -125,13 +136,14 @@ export const deleteAll = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
+        console.log('All users deleted:', deleted.count);
         handleResponse<{ deletedCount: number, deletedUsers?: User[] }>(
             res,
             200,
             `All users (${deleted.count}) were deleted successfully`,
-            { 
-                deletedCount: deleted.count, 
-                deletedUsers: deleted.users 
+            {
+                deletedCount: deleted.count,
+                deletedUsers: deleted.users
             }
         );
     } catch (error: unknown) {
