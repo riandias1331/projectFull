@@ -5,7 +5,7 @@ export default function Layout() {
     <div className="layout">
       <nav>
         <ul>
-          <li>
+          {/* <li>
             <Link to="/">Home</Link>
           </li>
           <li>
@@ -13,6 +13,9 @@ export default function Layout() {
           </li>
           <li>
             <Link to="/register">Register</Link>
+          </li> */}
+          <li>
+            <Link to="/">Sair</Link>
           </li>
         </ul>
       </nav>

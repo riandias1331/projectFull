@@ -7,14 +7,23 @@ import Register from './components/register.jsx'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
-        <Route path="main" element={<Main />} /> {/* Adicione esta rota */}
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Route>
-    </Routes>
+    // <Routes>
+    //   <Route path="/" element={<Layout />}>
+    //   <Route index element={<Home />} />
+    //     <Route path="main" element={<Main />} /> {/* Adicione esta rota */}
+    //     <Route path="login" element={<Login />} />
+    //     <Route path="register" element={<Register />} />
+    //   </Route>
+    // </Routes>
+
+<Routes>
+  <Route path="/" element={<Layout />}>
+  <Route index element={<Home />} />
+    <Route path="main" element={<Main />} /> {/* Adicione esta rota */}
+    <Route path="login" element={<Login />} />
+    <Route path="register" element={<Register />} />
+  </Route>
+</Routes>
   )
 }
 

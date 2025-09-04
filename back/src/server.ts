@@ -27,7 +27,7 @@ app.use(routes)
 app.use(errorHandler)
 
 // DataBase Mongodb
-mongoose.connect(process.env.DATABASE_URL as string)
+mongoose.connect(process.env.MONGO_URL as string)
     .then(() => {
         console.log("DataBase is connected")
         app.emit("DataBase")
