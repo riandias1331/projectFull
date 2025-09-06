@@ -14,8 +14,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/joi": "^17.2.2",
-    "@types/nodemon": "^1.19.6",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
@@ -31,8 +29,10 @@
     "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
+    "@types/joi": "^17.2.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.96",
+    "@types/nodemon": "^1.19.6",
     "@types/pg": "^8.15.5",
     "ts-node": "^10.9.2"
   }

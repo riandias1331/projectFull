@@ -55,7 +55,6 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         console.log('token:', token, user);
         console.log('User created', 'token:', token, user);
         handleResponse<User>(res, 201, 'User created successfully', user, token);
-        res.json(token)
     } catch (error) {
         console.error('Error in createUser:', error);
         handleResponse(res, 500, 'Error creating user');
