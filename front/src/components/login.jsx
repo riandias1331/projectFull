@@ -4,6 +4,7 @@ import './auth.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
+        name: '',
         email: '',
         password: ''
     });
@@ -35,7 +36,7 @@ const Login = () => {
             
             // DEPOIS (usando .env com Vite):
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-            const response = await fetch(`${API_URL}/api/login`, {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,6 +80,16 @@ const Login = () => {
             {successMessage && <div className="success-message login-success">{successMessage}</div>}
 
             <form className="auth-inputs" onSubmit={handleSubmit}>
+                <div className="auth-input">
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder='Nome'
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
                 <div className="auth-input">
                     <input
                         type="email"
