@@ -1,116 +1,210 @@
+/* Home.css - Versão Preto e Branco */
 .home-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 80vh;
   padding: 20px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
 }
 
 .home-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 700px;
+  width: 100%;
+  padding: 50px 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .home-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #222;
+  font-weight: 800;
 }
 
 .home-content p {
   font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #666;
+  margin-bottom: 35px;
+  color: #555;
+  line-height: 1.6;
 }
 
 .home-actions {
   display: flex;
   gap: 15px;
   justify-content: center;
-  align-items: center; /* Adicionado para alinhamento vertical */
+  align-items: center;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* Para responsividade em telas menores */
+  flex-wrap: wrap;
 }
 
 .home-button {
-  padding: 12px 25px;
-  border-radius: 6px;
+  padding: 14px 32px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-flex; /* Alterado de padrão para inline-flex */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px; /* Altura consistente para todos os botões */
-  border: none; /* Remove bordas padrão */
+  min-height: 48px;
+  border: none;
   cursor: pointer;
   font-size: 1rem;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.home-button:hover::after {
+  opacity: 1;
 }
 
 .home-button.primary {
-  background-color: #6e8efb;
+  background: #222;
   color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .home-button.primary:hover {
-  background-color: #5a7dfa;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(106, 142, 251, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .home-button.secondary {
   background-color: transparent;
-  color: #6e8efb;
-  border: 2px solid #6e8efb;
+  color: #222;
+  border: 2px solid #222;
 }
 
 .home-button.secondary:hover {
-  background-color: #f0f3ff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(106, 142, 251, 0.2);
+  background: #222;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Botão GitHub - CORRIGIDO */
-.home-button.github {
-  background-color: #24292e;
-  color: white;
-  display: inline-flex; /* Garantido */
-  align-items: center;
+/* Social Login Section */
+.social-login {
+  display: flex;
+  gap: 15px;
   justify-content: center;
-  gap: 10px;
-  padding: 12px 25px; /* Padding consistente */
-  border-radius: 6px; /* Border-radius consistente */
-  border: none; /* Remove qualquer borda */
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.social-divider {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.social-divider span {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 15px;
+  color: #888;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.home-button.google {
+  background: #333;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.home-button.google:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.home-button.github {
+  background: #1a1a1a;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .home-button.github:hover {
-  background-color: #1a1e22;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(36, 41, 46, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Ícones dos botões sociais */
+.home-button.google::before {
+  content: 'G';
+  font-weight: bold;
+  font-size: 1.2em;
+  background: white;
+  color: #333;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.home-button.github::before {
+  content: '🐙';
+  font-size: 1.2em;
+  margin-right: 8px;
 }
 
 .forgot-password {
   color: #666;
   margin-top: 20px;
+  font-size: 0.95rem;
 }
 
 .forgot-password a {
-  color: #6e8efb;
+  color: #222;
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
 .forgot-password a:hover {
+  color: #555;
   text-decoration: underline;
-}
-
-/* Para ícones dentro dos botões */
-.home-button i,
-.home-button svg {
-  font-size: 1.2em;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
+  .home-content {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+  
   .home-actions {
     flex-direction: column;
     gap: 12px;
@@ -118,22 +212,31 @@
   
   .home-button {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
   }
   
   .home-content h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .home-content p {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .social-login {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .home-container {
     min-height: 60vh;
-    padding: 15px;
+    padding: 10px;
+  }
+  
+  .home-content {
+    padding: 25px 15px;
   }
   
   .home-content h1 {
@@ -141,6 +244,12 @@
   }
   
   .home-content p {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .home-button {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    min-height: 42px;
   }
 }

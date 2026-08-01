@@ -1,3 +1,4 @@
+// Home.jsx - Removido o emoji do título
 import { Link } from 'react-router-dom';
 import './Home.css';
 
@@ -10,7 +11,7 @@ export default function Home() {
 
   const handleGitHubLogin = () => {
     // Redireciona para o backend que inicia o OAuth do GitHub
-    window.location.href = "http://localhost:4001/auth/github"; // ajuste a porta se necessário
+    window.location.href = "http://localhost:4001/auth/github";
   };
 
   return (
@@ -30,14 +31,17 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* 🔐 LOGIN SOCIAL */}
             <div className="social-login">
+              <div className="social-divider">
+                <span>ou continue com</span>
+              </div>
+              
               {/* Google */}
               <button onClick={handleGoogleLogin} className="home-button google">
                 Entrar com Google
               </button>
 
-              {/* GitHub - mesmo padrão do Google */}
+              {/* GitHub */}
               <button onClick={handleGitHubLogin} className="home-button github">
                 Entrar com GitHub
               </button>
